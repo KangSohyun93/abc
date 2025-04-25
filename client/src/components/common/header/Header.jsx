@@ -93,18 +93,55 @@ const HeaderMobile = () => {
           <SheetTrigger>
             <i className="bx bx-menu text-8xl"></i>
           </SheetTrigger>
-          <SheetContent
-          side="left"
-            
-          >
-            <SheetHeader>
-              <SheetTitle>Are you absolutely sure?</SheetTitle>
-              <SheetDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </SheetDescription>
-            </SheetHeader>
-          </SheetContent>
+          <SheetContent side="left" className="w-[280px] bg-white p-6 flex flex-col gap-6">
+  {/* Logo hoặc Profile (nếu có) */}
+  <div className="flex items-center gap-4">
+    <img
+      src="https://cdn-global-eude.popmart.com/global-web/eude-prod/assets/images/logo.png?x-oss-process=image/format,webp"
+      alt="Logo"
+      className="h-10 w-10 object-cover rounded-full"
+    />
+    <div>
+      <h2 className="text-lg font-bold text-gray-800">Pop Mart</h2>
+      <p className="text-sm text-gray-500">Xin chào bạn!</p>
+    </div>
+  </div>
+
+  {/* Menu List */}
+  <div className="flex flex-col gap-4">
+    <Link to="/" className="flex items-center gap-3 text-gray-700 hover:text-yellow-500 transition">
+      <i className="bx bx-home-alt-2 text-2xl"></i> 
+      <span className="text-lg font-medium">Homepage</span>
+    </Link>
+    <Link to={'/collection/New Arrival'} className="flex items-center gap-3 text-gray-700 hover:text-yellow-500 transition">
+      <i className="bx bx-shopping-bag text-2xl"></i>
+      <span className="text-lg font-medium">New Arrival</span>
+    </Link>
+    <Link to="/collection/TOP SELLINGS" className="flex items-center gap-3 text-gray-700 hover:text-yellow-500 transition">
+      <i className="bx bx-gift text-2xl"></i>
+      <span className="text-lg font-medium">Top Sellings</span>
+    </Link>
+    <Link to="/payment" className="flex items-center gap-3 text-gray-700 hover:text-yellow-500 transition">
+      <i className="bx bx-info-circle text-2xl"></i>
+      <span className="text-lg font-medium">Payment</span>
+    </Link>
+    <Link to="/cart" className="flex items-center gap-3 text-gray-700 hover:text-yellow-500 transition">
+      <i className="bx bx-envelope text-2xl"></i>
+      <span className="text-lg font-medium">Cart</span>
+    </Link>
+  </div>
+
+  {/* Button Đăng nhập / Đăng ký */}
+  <div className="mt-auto">
+    <Button
+      variant="outline"
+      className="w-full rounded-full text-lg font-semibold hover:bg-yellow-400 hover:text-white transition"
+    >
+      Đăng nhập / Đăng ký
+    </Button>
+  </div>
+</SheetContent>
+
         </Sheet>
       </div>
     </div>

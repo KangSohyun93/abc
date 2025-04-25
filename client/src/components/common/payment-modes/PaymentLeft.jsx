@@ -9,6 +9,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import AddAddressDialog from "../address-diaglog/AddressDialog";
 
 const PaymentLeft = () => {
   return (
@@ -33,10 +42,23 @@ const PaymentLeft = () => {
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
+                <SheetTitle className={'text-2xl mb-5'}>My Address</SheetTitle>
                 <SheetDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
+                 <div className="flex justify-center items-center flex-col">
+                    <Button
+                      size="icon"
+                      variant="default"
+                      className="bg-[#F7F7F7] hover:bg-[#F7F7F7] rounded-2xl mb-10"
+                    >
+                      <i className="bx bx-map text-2xl text-[#010101]"></i>
+                    </Button>
+  
+                    <p className="mb-20">
+                      You currently dont't have any saved delivery addresses. Add
+                      an address here to be pre-filled for quicker checkout.
+                    </p>
+                 </div>
+                  <AddAddressDialog />
                 </SheetDescription>
               </SheetHeader>
             </SheetContent>
@@ -92,25 +114,37 @@ const PaymentLeft = () => {
           Billing address:
         </h5>
         <Sheet>
-            <SheetTrigger asChild>
+          <SheetTrigger asChild>
             <Button
-          variant="outline"
-          className="w-full border border-black text-black font-bold rounded-none text-[.9375vw] py-[.625vw] hover:bg-[#f5f5f5]"
-        >
-          Add a Billing adress
-        </Button>
-            </SheetTrigger>
-            <SheetContent>
+              variant="outline"
+              className="w-full border border-black text-black font-bold rounded-none text-[.9375vw] py-[.625vw] hover:bg-[#f5f5f5]"
+            >
+              Add a Billing adress
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
               <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
+                <SheetTitle className={'text-2xl mb-5'}>My Address</SheetTitle>
                 <SheetDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
+                 <div className="flex justify-center items-center flex-col">
+                    <Button
+                      size="icon"
+                      variant="default"
+                      className="bg-[#F7F7F7] hover:bg-[#F7F7F7] rounded-2xl mb-10"
+                    >
+                      <i className="bx bx-map text-2xl text-[#010101]"></i>
+                    </Button>
+  
+                    <p className="mb-20">
+                      You currently dont't have any saved delivery addresses. Add
+                      an address here to be pre-filled for quicker checkout.
+                    </p>
+                 </div>
+                  <AddAddressDialog />
                 </SheetDescription>
               </SheetHeader>
             </SheetContent>
-          </Sheet>
-    
+        </Sheet>
       </div>
       <Button variant="destructive" className={"uppercase w-full"}>
         Processed to pay
