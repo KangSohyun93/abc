@@ -72,7 +72,7 @@ importers:
         specifier: ^13.5.0
         version: 13.5.0(@testing-library/dom@8.20.1)
       axios:
-        specifier: ^1.7.2
+        specifier: ^1.8.4
         version: 1.8.4
       classnames:
         specifier: ^2.5.1
