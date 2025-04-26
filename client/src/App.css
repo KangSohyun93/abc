@@ -188,7 +188,7 @@ body {
 
 /* Font-size cho các phần tử văn bản */
 h1, h2, h3, h4, h5, h6 {
-  font-size: clamp(1.5rem, 2.5vw, 3rem);
+  font-size: clamp(0.96rem, 1.6vw, 1.92rem);
 }
 
 p, span, a {
@@ -1096,4 +1096,382 @@ button, input {
     padding: 0.3rem 0.4rem;
     font-size: 0.65rem;
   }
+}
+
+/* Style cho PaymentPage */
+.payment-page {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin-bottom: 5rem;
+  padding: 0 1rem;
+}
+
+.payment-container {
+  width: 100%;
+  max-width: 63.2%;
+  margin-top: 5rem;
+  display: flex;
+  gap: 2.5rem;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .payment-container {
+    flex-direction: row;
+  }
+}
+
+/* Style cho PaymentLeft */
+.payment-left {
+  flex: 1;
+}
+
+.section-title {
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+  color: #010101;
+  font-weight: bold;
+  margin-bottom: clamp(0.5rem, 1.14583vw, 1rem);
+}
+
+.section-description {
+  font-size: clamp(0.625rem, 0.83333vw, 0.875rem);
+  color: #666;
+  font-weight: normal;
+  margin-bottom: 1rem;
+}
+
+.payment-left button {
+  font-size: clamp(0.75rem, 0.9375vw, 1rem);
+  padding: clamp(0.5rem, 0.625vw, 0.75rem);
+}
+
+.coupon-section .flex {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.coupon-section input {
+  font-size: clamp(0.75rem, 0.9375vw, 1rem);
+  padding: 0.5rem;
+}
+
+.coupon-section button {
+  font-size: clamp(0.75rem, 0.9375vw, 1rem);
+  padding: clamp(0.5rem, 0.625vw, 0.75rem) 1rem;
+}
+
+.add-on-section .product-image {
+  width: clamp(4rem, 6vw, 6rem);
+  height: clamp(4rem, 6vw, 6rem);
+  object-fit: cover;
+}
+
+.add-on-section .product-name {
+  font-size: clamp(0.625rem, 0.78125vw, 0.875rem);
+  font-weight: 500;
+  color: #999;
+  margin-bottom: 0.5rem;
+}
+
+.add-on-section .product-price {
+  font-size: clamp(0.625rem, 0.78125vw, 0.875rem);
+  font-weight: bold;
+  color: #dc2626;
+  margin-bottom: 0.5rem;
+}
+
+.add-on-section .product-details {
+  font-size: clamp(0.625rem, 0.78125vw, 0.875rem);
+  color: #1e90ff;
+}
+
+/* Style cho PaymentRight */
+.payment-right {
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: clamp(1rem, 1.66668vw, 1.5rem);
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .payment-right {
+    width: 30%;
+    position: sticky;
+    top: 5rem;
+  }
+}
+
+.summary .flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-label {
+  font-size: clamp(0.625rem, 0.78125vw, 0.875rem);
+  color: #010101;
+}
+
+.summary-value {
+  font-size: clamp(0.625rem, 0.78125vw, 0.875rem);
+  font-weight: 800;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label,
+.total-value {
+  font-size: clamp(0.875rem, 1.25vw, 1.25rem);
+  color: #010101;
+}
+
+.total-value {
+  font-weight: 800;
+}
+
+.order-items .order-title,
+.order-items .order-count {
+  font-size: clamp(0.625rem, 0.78125vw, 0.875rem);
+  font-weight: 500;
+  color: #010101;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.item-image {
+  width: clamp(4rem, 6vw, 6rem);
+  height: clamp(4rem, 6vw, 6rem);
+  object-fit: cover;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-size: clamp(0.625rem, 0.78125vw, 0.875rem);
+  font-weight: 500;
+  color: #010101;
+  margin-bottom: 0.5rem;
+}
+
+.item-variant {
+  font-size: clamp(0.625rem, 0.78125vw, 0.875rem);
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.item-price,
+.item-quantity {
+  font-size: clamp(0.625rem, 0.78125vw, 0.875rem);
+  color: #010101;
+}
+
+.item-price {
+  font-weight: bold;
+}
+
+/* Responsive */
+/* Style for PaymentPage */
+.payment-page {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin-bottom: 5rem;
+  padding: 0 1rem;
+}
+
+.payment-container {
+  width: 100%;
+  max-width: 63.2%;
+  margin-top: 5rem;
+  display: flex;
+  gap: 2.5rem;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .payment-container {
+    flex-direction: row;
+  }
+}
+
+.payment-left {
+  flex: 1;
+}
+
+.payment-right-wrapper {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .payment-right-wrapper {
+    width: 30%;
+  }
+}
+
+/* Style for PaymentRight (already present in App.css) */
+.payment-right {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .payment-right {
+    position: sticky;
+    top: 5rem;
+  }
+}
+
+.summary {
+  border-bottom: 1px solid #d1d5db;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.summary-label {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  color: #010101;
+}
+
+.summary-value {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  font-weight: 600;
+  color: #010101;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #d1d5db;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.total-label,
+.total-value {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 700;
+  color: #010101;
+}
+
+.order-items {
+  margin-top: 1.5rem;
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.order-title,
+.order-count {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  font-weight: 600;
+  color: #010101;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.item-image {
+  width: clamp(4rem, 8vw, 5rem);
+  height: clamp(4rem, 8vw, 5rem);
+  object-fit: cover;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.item-name {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  font-weight: 500;
+  color: #010101;
+}
+
+.item-variant {
+  font-size: clamp(0.625rem, 0.875vw, 0.75rem);
+  color: #666;
+}
+
+.item-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.item-price,
+.item-quantity {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  color: #010101;
+}
+
+.item-price {
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .payment-right {
+    padding: 0.75rem;
+  }
+
+  .item-image {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .item-image {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .item-name,
+  .item-price,
+  .item-quantity {
+    font-size: 0.75rem;
+  }
+
+  .item-variant {
+    font-size: 0.625rem;
+  }
+}
+/* Style cho NewArrivals */
+.new-arrivals .product-info {
+  margin-top: 0.25rem !important; /* 4px */
+  margin-bottom: 0.25rem !important; /* 4px */
+}
+
+.new-arrivals .product-price {
+  padding-bottom: 0 !important; /* 0px */
 }

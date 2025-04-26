@@ -29,7 +29,7 @@ import {
   registerStart,
   registerSuccess,
 } from "@/redux/reducers/UserReducer";
-import { Loader2 } from "lucide-react";
+import { Heading3, Loader2 } from "lucide-react";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 

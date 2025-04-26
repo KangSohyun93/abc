@@ -77,39 +77,39 @@ const NewArrivals = ({ title, layout = false, className = "" }) => {
           </Link>
         </button>
       </div>
-      <Carousel className={"w-full Carousel1 px-4 sm:px-6 lg:px-8"}>
+      <Carousel className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <CarouselContent>
           {(isLoading ? Array.from({ length: 4 }) : fakeProducts).map(
             (data, index) => {
               return (
                 <CarouselItem
                   key={index}
-                  className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 2xl:basis-1/6"
+                  className="basis-1/4 min-w-0"
                 >
                   {isLoading ? (
                     <Skeleton className="h-64 w-full rounded-lg bg-[#E0E0E0]" />
                   ) : layout ? (
                     <Link to={`/product/${data.id}`}>
-                      <div className="bg-white hover:border-2 rounded-lg overflow-hidden">
-                        <div className="w-full aspect-square card-item">
+                      <div className="bg-white rounded-lg overflow-hidden">
+                        <div className="w-full aspect-[3/2] card-item">
                           <img
                             alt={data.name || "Popmart product"}
                             src={data.thumbnail}
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <div className="flex flex-col text-xs font-bold my-4 px-2">
+                        <div className="flex flex-col text-xs font-bold my-1 px-2 product-info">
                           <span>{data.date}</span>
-                          <span>{data.name}</span>
+                          <span className="line-clamp-2">{data.name}</span>
                         </div>
-                        <div className="flex justify-between items-center px-2 pb-2">
+                        <div className="flex justify-between items-center px-2 pb-0 product-price">
                           <span className="text-[#E60021]">
                             {data.price} <sup>₫</sup>
                           </span>
                           <Button
                             size="icon"
                             variant="outline"
-                            className="rounded-full w-8 h-8 sm:w-7 sm:h-7 lg:w-[2.08333vw] lg:h-[2.08333vw]"
+                            className="rounded-full w-8 h-8"
                           >
                             <i className="bx bx-bell"></i>
                           </Button>

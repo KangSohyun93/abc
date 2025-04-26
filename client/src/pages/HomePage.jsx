@@ -24,8 +24,7 @@ const HomePage = () => {
         })}
         <PopularSearches />
         <TopSelling />
-        <PopFriend />
-        <Banner />
+
       </div>
     </div>
   );

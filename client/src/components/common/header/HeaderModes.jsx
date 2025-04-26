@@ -37,7 +37,7 @@ const HeaderModes = () => {
         ) : (
           <>
             <Link to="/login" className="auth-link">
-              Sign in
+              Login
             </Link>
             <span>/</span>
             <Link to="/register" className="auth-link">

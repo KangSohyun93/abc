@@ -6,15 +6,12 @@ const BannerProduct = ({ images }) => {
   }
 
   return (
-    <div className="flex justify-center banner-product px-4 sm:px-6 lg:px-8">
-      <div className="mb-20 w-full max-w-6xl">
+    <div className="flex justify-center mb-20">
+      <div className="w-full">
         {images.map((img, index) => (
-          <div
-            key={index}
-            className="w-full min-h-[200px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] xl:min-h-[450px]"
-          >
+          <div key={index} className="w-full">
             <img
-              className="w-full h-full object-contain rounded-lg"
+              className="w-full h-auto object-contain rounded-lg"
               src={img}
               alt={`Banner ${index + 1}`}
               onError={(e) => {

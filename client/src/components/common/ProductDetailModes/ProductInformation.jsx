@@ -50,79 +50,65 @@ const ProductInformation = () => {
   }, [msg]);
 
   return (
-    <div className="bg-purple-400 lg:w-auto w-[94%]">
+    <div className="bg-white w-full">
       {msg && (
-        <Alert className="mb-4 absolute right-6 max-w-[12%]  bg-[#333333] max-h-[5%] flex items-center -translate-y-10 transition-all duration-500 ease-in-out">
-          <AlertDescription className={"flex items-center justify-between"}>
-            <span className="lg:text-xs mr-6 text-6xl">Added to cart</span>
-            <Link to={"/cart"}>
-              {" "}
-              <Button variant={"destructive"} className={"h-5 w-12"}>
+        <Alert className="mb-4 absolute right-4 w-[200px] h-[50px] bg-[#333333] flex items-center -translate-y-10 transition-all duration-500 ease-in-out">
+          <AlertDescription className="flex items-center justify-between text-sm">
+            <span className="mr-4">Added to cart</span>
+            <Link to="/cart">
+              <Button variant="destructive" className="h-6 w-12 text-xs">
                 View
               </Button>
             </Link>
           </AlertDescription>
         </Alert>
       )}
-      <div className="flex items-center justify-between mb-10 lg:mb-0">
-        <h3 className="lg:text-[1.45833vw] text-[#000] font-bold text-7xl md:text-4xl ">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-2xl text-[#000] font-bold">
           Peach Riot Witchy Punk Figures
         </h3>
-        <i className="bx bx-heart lg:text-xl text-7xl hidden lg:visible "></i>
+        <i className="bx bx-heart text-xl"></i>
       </div>
-      <span className="mt-[1.25vw] text-[#d2001e] lg:text-[1.25vw] text-6xl md:text-3xl">
+      <span className="mt-2 text-xl text-[#d2001e]">
         1.520.000 <sup>đ</sup>
       </span>
-      <div className="lg:my-0 my-10">
-        <span className="lg:text-base font-normal text-6xl md:text-3xl">Quantity</span>
-        <AddQuantityBtn className={"lg:mt-3 mt-10 w-auto h-auto"} />
+      <div className="my-4">
+        <span className="text-base font-normal">Quantity</span>
+        <AddQuantityBtn className="mt-2 w-auto h-auto" />
       </div>
-      <div className="flex lg:flex-row gap-[0 .3125vw] lg:justify-between justify-center flex-col flex-wrap items-center mt-5 lg:pb-5 pb-10 border-b-2 border-b-[#DDDDDD]
-      lg:space-y-0
-      space-y-10
-      
-      ">
+      <div className="flex gap-2 justify-center items-center mt-5 pb-5 border-b-2 border-b-[#DDDDDD]">
         <Button
-          className={
-            "uppercase lg:w-[11.5625vw] lg:h-[3.125vw] text-white cursor-pointer font-bold lg:text-[.83333vw] text-5xl w-[100%] h-auto md:text-3xl"
-          }
+          className="uppercase w-[180px] h-10 text-white font-bold text-sm bg-black hover:bg-gray-800"
           onClick={handleAddItemToCart}
         >
-          add to cart
+          Add to Cart
         </Button>
-        <Link to={"/payment"} className="lg:w-auto w-[100%]">
+        <Link to="/payment">
           <Button
-            className={
-              "uppercase lg:w-[11.5625vw] lg:h-[3.125vw] w-[100%] h-auto text-white cursor-pointer font-bold lg:text-[.83333vw] bg-[#d2001e] text-5xl md:text-3xl"
-            }
+            className="uppercase w-[180px] h-10 text-white font-bold text-sm bg-[#d2001e] hover:bg-red-700"
           >
-            Buy now
+            Buy Now
           </Button>
         </Link>
       </div>
       {dataAccordion.map((item, index) => (
-        <div key={index} className={"border-b-2 border-b-[#DDDDDD]"}>
+        <div key={index} className="border-b-2 border-b-[#fffdd0]">
           <Accordion type="single" collapsible>
             <AccordionItem value={`item-${index}`}>
-              <AccordionTrigger className={"lg:text-base text-6xl md:text-3xl"}>
+              <AccordionTrigger className="text-base">
                 {item.title}
               </AccordionTrigger>
-              <AccordionContent className={'lg:block flex flex-col'}>
+              <AccordionContent>
                 {item.data.map((line, i) => (
-                  <span
-                    key={i}
-                    className="lg:text-[.83333vw] font-normal text-5xl lg:mb-0 mb-10 md:text-3xl"
-                  >
+                  <span key={i} className="text-sm font-normal block mb-2">
                     {line}
                   </span>
                 ))}
                 <div className="flex justify-between">
                   {item.outlinedText.map((text, i) => (
-                    <div key={i}>
-                      <span className="lg:text-[.83333vw] font-normal underline text-5xl md:text-3xl">
-                        {text}
-                      </span>
-                    </div>
+                    <span key={i} className="text-sm font-normal underline">
+                      {text}
+                    </span>
                   ))}
                 </div>
               </AccordionContent>

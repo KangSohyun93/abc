@@ -3,13 +3,21 @@ import PaymentRight from "@/components/common/payment-modes/PaymentRight";
 import React from "react";
 
 const PaymentPage = () => {
+  // Dữ liệu sản phẩm (có thể lấy từ Redux, API, hoặc state)
+  const addOnProduct = {
+    id: "labubu-lemon-tea",
+    name: "LABUBU Lemon Tea Figure",
+    price: 700000,
+    image: "https://prod-eurasian-res.popmart.com/default/20250416_173858_765015____7_____1200x1200.jpg?x-oss-process=image/format,webp",
+  };
+
   return (
-    <div className="flex justify-center items-start mb-20 px-4">
-      <div className="w-full max-w-[63.2%] mt-20 flex gap-10 flex-col lg:flex-row">
-        <div className="flex-1">
-          <PaymentLeft />
+    <div className="payment-page">
+      <div className="payment-container">
+        <div className="payment-left">
+          <PaymentLeft addOnProduct={addOnProduct} />
         </div>
-        <div className="lg:w-[30%]">
+        <div className="payment-right-wrapper">
           <PaymentRight />
         </div>
       </div>
