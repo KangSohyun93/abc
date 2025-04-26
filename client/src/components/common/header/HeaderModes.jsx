@@ -47,8 +47,6 @@ const HeaderModes = () => {
         )}
       </div>
       <div className="flex items-center gap-2">
-        <i className="bx bx-headphone text-xl text-[#999999]"></i>
-        <i className="bx bx-heart text-xl text-[#999999]"></i>
         <Link to="/cart">
           <Button
             variant="secondary"
