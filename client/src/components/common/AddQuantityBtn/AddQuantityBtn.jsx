@@ -19,27 +19,24 @@ const AddQuantityBtn = ({ className = "" }) => {
       return newQuantity;
     });
   }, []);
+
   return (
-    <div className={`flex space-x-3 items-center ${className}`}>
+    <div className={`add-quantity-btn ${className}`}>
       <Button
-        size={"icon"}
-        className={
-          "bg-transparent border-1 border-black lg:w-7 lg:h-7 w-[10%] h-[100%] md:w-[10%] md:h-16"
-        }
+        size="icon"
+        className="bg-transparent border border-black"
         onClick={handleDecreaseQuantity}
         disabled={disabledBtn}
       >
-        <i className="bx bx-minus text-black lg:text-base text-7xl md:text-5xl"></i>
+        <i className="bx bx-minus text-black"></i>
       </Button>
-      <span className="text-center lg:text-base text-6xl md:text-4xl">{quantity}</span>
+      <span className="text-center">{quantity}</span>
       <Button
-        size={"icon"}
-        className={
-          "bg-transparent border-1 border-black lg:w-7 lg:h-7 w-[10%] h-[100%]  md:w-[10%] md:h-16 "
-        }
+        size="icon"
+        className="bg-transparent border border-black"
         onClick={handleIncreaseQuantity}
       >
-        <i className="bx bx-plus text-black lg:text-base text-7xl md:text-5xl"></i>
+        <i className="bx bx-plus text-black"></i>
       </Button>
     </div>
   );

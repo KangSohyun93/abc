@@ -9,16 +9,16 @@ const AddAddressDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="uppercase bg-black text-white rounded-none text-[.9375vw] py-[.625vw] hover:bg-[#333]">
+        <Button className="uppercase bg-black text-white rounded-none hover:bg-[#333]">
           Add a new address
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[600px] rounded-none">
+      <DialogContent className="add-address-dialog rounded-none">
         <DialogHeader className="mb-4">
-          <DialogTitle className="text-center text-xl font-bold">ADD A NEW ADDRESS</DialogTitle>
+          <DialogTitle className="dialog-title">ADD A NEW ADDRESS</DialogTitle>
         </DialogHeader>
-        <form className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <form>
+          <div className="grid">
             <div>
               <label htmlFor="firstName">First Name</label>
               <Input id="firstName" placeholder="* First Name" />
@@ -43,7 +43,7 @@ const AddAddressDialog = () => {
             <label htmlFor="apartment">Apartment, Suite, etc. (Optional)</label>
             <Input id="apartment" placeholder="Apartment, Suite, etc. (Optional)" />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid">
             <div>
               <label htmlFor="city">City/Ward/Town/Village</label>
               <Input id="city" placeholder="* City/ward/town/village" />
@@ -70,7 +70,7 @@ const AddAddressDialog = () => {
             <Checkbox id="defaultAddress" />
             <label htmlFor="defaultAddress">Set as default address</label>
           </div>
-          <Button type="submit" className="w-full bg-black text-white rounded-none text-[.9375vw] py-[.625vw] hover:bg-[#333]">
+          <Button type="submit" className="w-full bg-black text-white rounded-none hover:bg-[#333]">
             Save
           </Button>
         </form>

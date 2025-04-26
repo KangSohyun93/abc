@@ -28,23 +28,25 @@ const images = [
 
 const Recommendation = () => {
   return (
-    <div className="lg:mb-20 mb-15">
-      <h2 className="uppercase lg:text-[1.66667vw] font-bold lg:mb-[1.66667vw] text-5xl mb-5 md:text-xl">
+    <div className="mb-10 sm:mb-12 lg:mb-20">
+      <h2 className="uppercase text-3xl sm:text-2xl md:text-xl lg:text-[1.66667vw] font-bold mb-4 sm:mb-5 lg:mb-[1.66667vw]">
         HIRONO Recommendation
       </h2>
       <Carousel>
         <CarouselContent>
           {images.map((data, index) => {
             return (
-              <CarouselItem key={index} className={"lg:basis-1/3 md:basis-1/3 basis-1/2"}>
-                <img src={data.img} alt="logo" className="w-[100%]" />
-                <span className="lg:text-sm mt-3 text-4xl line-clamp-1 md:text-xl">{data.name}</span>
+              <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/3">
+                <img src={data.img} alt="logo" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover rounded-lg" />
+                <span className="text-base sm:text-sm md:text-xl lg:text-sm mt-2 sm:mt-3 line-clamp-1">
+                  {data.name}
+                </span>
               </CarouselItem>
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className={"-left-4 -translate-y-8"} />
-        <CarouselNext className={"-right-4 -translate-y-8"} />
+        <CarouselPrevious className="left-0 sm:-left-4 lg:-left-6 -translate-y-1/2" />
+        <CarouselNext className="right-0 sm:-right-4 lg:-right-6 -translate-y-1/2" />
       </Carousel>
     </div>
   );

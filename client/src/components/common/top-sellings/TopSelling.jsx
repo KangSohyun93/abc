@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import CartItem from "../cart-item/CartItem";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { fakeProducts } from "@/data/WebData";
 
 const data = [
@@ -74,14 +74,18 @@ const TopSelling = () => {
         top sellings
       </h2>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 row-span-3 gap-7">
-            {fakeProducts.map((e, index) => {
-                return (
-                  <CartItem key={index} img={e.thumbnail} name={e.name} price={e.price}/>
-                )
-            })}
+        {fakeProducts.map((e, index) => {
+          return (
+            <Link key={index} to={`/product/${e.id}`}>
+              <CartItem img={e.thumbnail} name={e.name} price={e.price} />
+            </Link>
+          );
+        })}
       </div>
-      <div className="mt-10 flex justify-center ">
-        <Button variant={'destructive'} className={'uppercase'}><Link to={'/collection/TOP SELLINGS'}>View more</Link></Button>
+      <div className="mt-10 flex justify-center">
+        <Button variant={"destructive"} className={"uppercase"}>
+          <Link to={"/collection/TOP SELLINGS"}>View more</Link>
+        </Button>
       </div>
     </div>
   );

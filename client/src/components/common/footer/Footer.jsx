@@ -4,7 +4,7 @@ import FooterBody from './FooterBody'
 
 const Footer = () => {
   return (
-    <footer className='sm:w-[68.5rem] lg:w-full md:w-[125rem] w-[68.5rem]'>
+    <footer className='w-full lg:w-full'>
       <FooterHeader />
       <FooterBody />
     </footer>

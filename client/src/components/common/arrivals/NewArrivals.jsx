@@ -49,7 +49,7 @@ export const arrivalImages = [
   },
 ];
 
-const NewArrivals = ({ title, layout = false, className='' }) => {
+const NewArrivals = ({ title, layout = false, className = "" }) => {
   const { isLoading } = useSelector((state) => state.loading);
   const dispatch = useDispatch();
 
@@ -62,56 +62,60 @@ const NewArrivals = ({ title, layout = false, className='' }) => {
   }, [dispatch]);
 
   return (
-    <div className={`lg:mb-20 lg:w-[100%] mb-10 ${className}`}>
-      <div className="flex justify-between items-center mb-[1.66667vw] w-full ">
-        <h5 className="uppercase text-[#E60021] font-bold lg:text-[1.66667vw] text-5xl md:text-xl">
+    <div className={`lg:mb-20 mb-10 w-full ${className}`}>
+      <div className="flex justify-between items-center mb-6 w-full px-4 sm:px-6 lg:px-8">
+        <h5 className="uppercase text-[#E60021] font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[1.66667vw]">
           {title}
         </h5>
         <button>
-          <Link className="flex items-center justify-center border-b-2 border-b-[#262626] h-4 cursor-pointer
-          pb-2
-          "
-          to={'/collection/New Arrival'}
+          <Link
+            className="flex items-center justify-center border-b-2 border-b-[#262626] h-4 cursor-pointer pb-2"
+            to={"/collection/New Arrival"}
           >
-            <span className="lg:text-xs text-xl">More</span>
-            <ChevronRight className="lg:w-[12px] w-[1rem]" />
+            <span className="text-sm sm:text-base lg:text-xs">More</span>
+            <ChevronRight className="w-3 sm:w-4 lg:w-3" />
           </Link>
         </button>
       </div>
-      <Carousel className={'w-full Carousel1'}>
+      <Carousel className={"w-full Carousel1 px-4 sm:px-6 lg:px-8"}>
         <CarouselContent>
           {(isLoading ? Array.from({ length: 4 }) : fakeProducts).map(
             (data, index) => {
               return (
-                <CarouselItem key={index} className="lg:basis-1/4 md:basis-1/3 basis-1/2">
+                <CarouselItem
+                  key={index}
+                  className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 2xl:basis-1/6"
+                >
                   {isLoading ? (
-                    <Skeleton className="h-[20rem] w-full rounded-lg bg-[#E0E0E0]" />
+                    <Skeleton className="h-64 w-full rounded-lg bg-[#E0E0E0]" />
                   ) : layout ? (
-                    <div className="bg-white hover:border-2">
-                      <div className="w-auto lg:h-[16.75rem] card-item">
-                        <img
-                          alt={data.name || "Popmart product"}
-                          src={data.thumbnail}
-                          className="w-full h-full"
-                        />
+                    <Link to={`/product/${data.id}`}>
+                      <div className="bg-white hover:border-2 rounded-lg overflow-hidden">
+                        <div className="w-full aspect-square card-item">
+                          <img
+                            alt={data.name || "Popmart product"}
+                            src={data.thumbnail}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="flex flex-col text-xs font-bold my-4 px-2">
+                          <span>{data.date}</span>
+                          <span>{data.name}</span>
+                        </div>
+                        <div className="flex justify-between items-center px-2 pb-2">
+                          <span className="text-[#E60021]">
+                            {data.price} <sup>₫</sup>
+                          </span>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="rounded-full w-8 h-8 sm:w-7 sm:h-7 lg:w-[2.08333vw] lg:h-[2.08333vw]"
+                          >
+                            <i className="bx bx-bell"></i>
+                          </Button>
+                        </div>
                       </div>
-                      <div className="flex flex-col text-xs font-bold my-4">
-                        <span>{data.date}</span>
-                        <span>{data.name}</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-[#E60021]">
-                          {data.price} <sup>₫</sup>
-                        </span>
-                        <Button
-                          size="icon"
-                          variant="outline"
-                          className="rounded-full w-[2.08333vw] h-[2.08333vw]"
-                        >
-                          <i className="bx bx-bell"></i>
-                        </Button>
-                      </div>
-                    </div>
+                    </Link>
                   ) : (
                     <Link to={`/product/${data.id}`}>
                       <CartItem
@@ -126,9 +130,8 @@ const NewArrivals = ({ title, layout = false, className='' }) => {
             }
           )}
         </CarouselContent>
-
-        <CarouselPrevious className={'-left-4 -translate-y-14' }/>
-        <CarouselNext  className={'-right-4 -translate-y-14'}/>
+        <CarouselPrevious className="left-0 -translate-y-1/2 sm:-left-4 lg:-left-6" />
+        <CarouselNext className="right-0 -translate-y-1/2 sm:-right-4 lg:-right-6" />
       </Carousel>
     </div>
   );

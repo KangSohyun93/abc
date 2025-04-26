@@ -40,58 +40,55 @@ const CustomCarousel = () => {
   const scrollPrev = () => emblaApi?.scrollPrev();
   const scrollNext = () => emblaApi?.scrollNext();
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(setSkeleton());
+    }, 2000);
 
-    useEffect(() => {
-      // Giả lập delay 2 giây, bạn có thể thay bằng fetch API nếu cần
-      const timer = setTimeout(() => {
-        dispatch(setSkeleton());
-      }, 2000);
-  
-      return () => clearTimeout(timer); // cleanup nếu component unmount
-    }, [dispatch]);
-return (
-  <div >
-    {isLoading ? (
-      <div className="relative w-full sm:w-[72rem] mx-auto overflow-hidden lg:mb-20 mb-7 h-[15rem] sm:h-[30rem]">
-        <Skeleton className="h-full w-full bg-[#E0E0E0]" />
-      </div>
-    ) : (
-      <div  className="relative w-fit lg:w-[100%%] mx-auto overflow-hidden lg:mb-20 mb-10 h-auto sm:min-h-[16rem]">
-        <div className="overflow-hidden lg:mt-0 mt-[5rem]" ref={emblaRef}>
-          <div className="flex">
-            {imgs.map((src, i) => (
-              <div key={i} className="flex-[0_0_100%]">
-                <img
-                  src={src}
-                  alt={`slide-${i}`}
-                  className="w-full h-full  lg:object-cover  min-h-[16rem] "
-                />
-              </div>
-            ))}
-          </div>
+    return () => clearTimeout(timer);
+  }, [dispatch]);
+
+  return (
+    <div>
+      {isLoading ? (
+        <div className="relative w-full max-w-[90rem] mx-auto overflow-hidden mb-10 sm:mb-12 lg:mb-20 h-60 sm:h-80 lg:h-96">
+          <Skeleton className="h-full w-full bg-[#E0E0E0]" />
         </div>
+      ) : (
+        <div className="relative w-full max-w-[90rem] mx-auto overflow-hidden mb-10 sm:mb-12 lg:mb-20 h-60 sm:h-80 lg:h-96">
+          <div className="overflow-hidden lg:mt-0 mt-10" ref={emblaRef}>
+            <div className="flex">
+              {imgs.map((src, i) => (
+                <div key={i} className="flex-[0_0_100%]">
+                  <img
+                    src={src}
+                    alt={`slide-${i}`}
+                    className="w-full h-60 sm:h-80 lg:h-96 object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
-        {/* Buttons only visible on sm and up */}
-        <button
-          onClick={scrollPrev}
-          disabled={!canScrollPrev}
-          className="hidden sm:block absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow hover:bg-gray-100 disabled:opacity-50"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
+          <button
+            onClick={scrollPrev}
+            disabled={!canScrollPrev}
+            className="hidden sm:block absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white p-1 sm:p-2 rounded-full shadow hover:bg-gray-100 disabled:opacity-50"
+          >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
 
-        <button
-          onClick={scrollNext}
-          disabled={!canScrollNext}
-          className="hidden sm:block absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow hover:bg-gray-100 disabled:opacity-50"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-      </div>
-    )}
-  </div>
-);
-
+          <button
+            onClick={scrollNext}
+            disabled={!canScrollNext}
+            className="hidden sm:block absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white p-1 sm:p-2 rounded-full shadow hover:bg-gray-100 disabled:opacity-50"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default CustomCarousel;

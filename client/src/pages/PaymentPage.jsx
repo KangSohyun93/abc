@@ -4,11 +4,13 @@ import React from "react";
 
 const PaymentPage = () => {
   return (
-    <div className=" flex justify-center items-center mb-20">
-      <div className="w-[63.2%]">
-        <div className="flex mt-20 gap-10">
-            <div className=" flex-1/2"><PaymentLeft /></div>
-            <div className=" flex-1/3"><PaymentRight /></div>
+    <div className="flex justify-center items-start mb-20 px-4">
+      <div className="w-full max-w-[63.2%] mt-20 flex gap-10 flex-col lg:flex-row">
+        <div className="flex-1">
+          <PaymentLeft />
+        </div>
+        <div className="lg:w-[30%]">
+          <PaymentRight />
         </div>
       </div>
     </div>
