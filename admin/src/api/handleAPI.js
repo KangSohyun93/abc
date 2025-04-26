@@ -1,10 +1,11 @@
 import axiosClient from "./axiosClient";
 
-const handleAPI = (uri, method='get', data) => {
+const handleAPI = (url, method = 'get', data, config = {}) => {
     return axiosClient({
-        uri,
+        url,
         method,
-        data
+        data,
+        ...config,
     })
 }
 export default handleAPI;

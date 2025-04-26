@@ -26,18 +26,18 @@ const userSlice = createSlice({
         },
         registerFail: (state, actions) => {
             state.register.loading = false;
-            state.register.user = actions.payload;
+            state.register.error = actions.payload;
         },
         loginStart: (state) => {
-            state.register.loading = true;
+            state.login.loading = true;
         },
         loginSuccess: (state, actions) => {
-            state.register.loading = false;
-            state.register.user = actions.payload;
+            state.login.loading = false;
+            state.login.user = actions.payload;
         },
         loginFail: (state, actions) => {
-            state.register.loading = false;
-            state.register.user = actions.payload;
+            state.login.loading = false;
+            state.login.error = actions.payload;
         },
     }
 })

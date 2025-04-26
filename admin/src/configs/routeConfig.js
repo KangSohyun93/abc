@@ -9,6 +9,7 @@ const routes = {
     form: '/form',
     calendar: '/calendar',
     bar: '/bar',
+    login: '/login',
     geography: '/geography',
 
 }

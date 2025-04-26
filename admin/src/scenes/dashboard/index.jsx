@@ -15,10 +15,13 @@ import { mockTransactions } from "~/data/mockData";
 import ProgressCircle from "~/components/ProgressCircle";
 import GeographyChart from "~/components/Geography";
 import BarChart from "~/components/BarChart";
+import { useSelector } from "react-redux";
 
 function Dashboard() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const {user} = useSelector((state) => state.user);
+  console.log(user);
 
   return (
     <Box m="20px">

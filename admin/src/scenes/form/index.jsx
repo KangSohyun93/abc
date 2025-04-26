@@ -1,83 +1,121 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, useMediaQuery } from "@mui/material";
 import { Formik } from "formik";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as yup from "yup";
 import handleAPI from "~/api/handleAPI";
 import Header from "~/components/Header";
-import {
-  createProductFail,
-  createProductStart,
-  createProductSuccess,
-} from "~/redux/reducer/ProductReducer";
+import { createProductFail, createProductStart, createProductSuccess } from "~/redux/reducer/ProductReducer";
+import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
+
 
 const initialValues = {
   name: "",
-  description: "",
-  quantity: "",
   price: "",
-  discountPrice: "",
-  image: null,
-  category: null,
-  user: null,
+  category: "",
+  character: "",
+  description: "",
+  images: [""],
+  countInStock: "",
+  sku: "",
+  isFeatured: false,
+  isPublished: false,
 };
+
+const checkoutSchema = yup.object().shape({
+  name: yup.string().required("Required"),
+  price: yup.number().required("Required"),
+  category: yup.string().required("Required"),
+  character: yup.string().required("Required"),
+  description: yup.string().required("Required"),
+  images: yup.array().of(yup.string().url("Must be a valid URL")).min(1, "At least one image URL"),
+  countInStock: yup.number().required("Required"),
+  sku: yup.string().required("Required"),
+  isFeatured: yup.boolean().required("Required"),
+  isPublished: yup.boolean().required("Required"),
+});
 
 function FormPage() {
   const isNonMobile = useMediaQuery("(min-width: 600px)");
   const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
+  console.log(user);
 
-  const handleCreateProduct = async (values) => {
-    const API = `/api/products/create`;
-    dispatch(createProductStart());
 
-    const newData = {
-      name: values.name,
-      description: values.description,
-      quantity: values.quantity,
-      price: values.price,
-      discountPrice: values.discountPrice,
-      image: values.image,
-      category: values.category,
-      user: user._id,
-    };
+ const handleCreateProduct = async (values, { resetForm }) => {
+  const API = `/api/products/create`;
+  dispatch(createProductStart());
 
-    try {
-      const product = await handleAPI(API, "post", newData);
-
-      dispatch(createProductSuccess(product));
-
-      if (!product) {
-        dispatch(createProductFail());
-      }
-    } catch (error) {
-      console.log(error);
-      dispatch(createProductFail());
-    }
+  const newData = {
+    name: values.name,
+    price: Number(values.price),
+    category: values.category,
+    character: values.character,
+    description: values.description,
+    images: values.images.map((url) => ({ url })),
+    countInStock: Number(values.countInStock),
+    sku: values.sku,
+    isFeatured: values.isFeatured,
+    isPublished: values.isPublished,
   };
 
+  try {
+    const token = Cookies.get('token');
+    const product = await handleAPI(API, "post", newData, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    dispatch(createProductSuccess(product));
+
+    if (product) {
+      toast.success("✅ Product created successfully!");
+      resetForm(); // 🧼 clear form fields
+    } else {
+      dispatch(createProductFail());
+      toast.error("❌ Failed to create product.");
+    }
+
+  } catch (error) {
+    console.log(error);
+    dispatch(createProductFail());
+    toast.error(`❌ Error: ${error.response?.data?.message || error.message}`);
+  }
+};
+
   useEffect(() => {
-    const getAllProducts = async () => {
+    const getAllCategories = async () => {
       try {
-        const category = await handleAPI(`/api/categories`);
-        if (category) {
-          setCategories(category);
+        const res = await handleAPI(`/api/categories`);
+        console.log(res.data);
+        if (res && res.data) {
+          setCategories(res.data);
+        }
+        // Nếu API trả ra array trực tiếp
+        else if (Array.isArray(res)) {
+          setCategories(res);
         }
       } catch (error) {
         console.log(error);
       }
     };
-    getAllProducts();
+    getAllCategories();
   }, []);
+  
 
   return (
     <Box m="20px">
       <Box sx={{ p: "0 1rem 0 0", mb: "1rem" }}>
-        <Header title="CREATE USER" subtitle="Create a New User Profile" />
+        <Header title="CREATE PRODUCT" subtitle="Create a New Product" />
       </Box>
-      <Formik onSubmit={handleCreateProduct} initialValues={initialValues}>
+      <Formik
+        onSubmit={handleCreateProduct}
+        initialValues={initialValues}
+        validationSchema={checkoutSchema}
+      >
         {({
           values,
           errors,
@@ -109,19 +147,21 @@ function FormPage() {
                 helperText={touched.name && errors.name}
                 sx={{ gridColumn: "span 2" }}
               />
+
               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Description"
+                label="Character"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.description}
-                name="description"
-                error={!!touched.description && !!errors.description}
-                helperText={touched.description && errors.description}
+                value={values.character}
+                name="character"
+                error={!!touched.character && !!errors.character}
+                helperText={touched.character && errors.character}
                 sx={{ gridColumn: "span 2" }}
               />
+
               <TextField
                 fullWidth
                 variant="filled"
@@ -133,82 +173,106 @@ function FormPage() {
                 name="price"
                 error={!!touched.price && !!errors.price}
                 helperText={touched.price && errors.price}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
               />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Discount Price"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.discountPrice}
-                name="discountPrice"
-                error={!!touched.discountPrice && !!errors.discountPrice}
-                helperText={touched.discountPrice && errors.contact}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-                name="password"
-                error={!!touched.password && !!errors.password}
-                helperText={touched.password && errors.password}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.address}
-                name="address"
-                error={!!touched.address && !!errors.address}
-                helperText={touched.address && errors.address}
-                sx={{ gridColumn: "span 4" }}
-              />
-            </Box>
-            <Button variant="contained" component="label">
-              Upload File
-              <input
-                type="file"
-                hidden
-                onChange={(event) => {
-                  const file = event.currentTarget.files[0];
-                  setFieldValue("image", file); // Cập nhật vào Formik
-                }}
-              />
-            </Button>
 
-            <div>
-              <FormControl sx={{ m: 1, minWidth: 80 }}>
-                <InputLabel id="demo-simple-select-autowidth-label">
-                  Age
-                </InputLabel>
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Count In Stock"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.countInStock}
+                name="countInStock"
+                error={!!touched.countInStock && !!errors.countInStock}
+                helperText={touched.countInStock && errors.countInStock}
+                sx={{ gridColumn: "span 2" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="SKU"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.sku}
+                name="sku"
+                error={!!touched.sku && !!errors.sku}
+                helperText={touched.sku && errors.sku}
+                sx={{ gridColumn: "span 2" }}
+              />
+
+              <FormControl fullWidth variant="filled" sx={{ gridColumn: "span 2" }}>
+                <InputLabel>Category</InputLabel>
                 <Select
-                  labelId="demo-simple-select-autowidth-label"
-                  id="demo-simple-select-autowidth"
-                  value={categories}
+                  name="category"
+                  value={values.category}
                   onChange={handleChange}
-                  autoWidth
-                  label="Category"
+                  error={!!touched.category && !!errors.category}
                 >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={21}>Twenty one</MenuItem>
-                  <MenuItem value={22}>Twenty one and a half</MenuItem>
+                  {categories.map((c, index) => (
+                    <MenuItem key={index} value={c._id}>
+                      {c.name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
-            </div>
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Description"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.description}
+                name="description"
+                error={!!touched.description && !!errors.description}
+                helperText={touched.description && errors.description}
+                sx={{ gridColumn: "span 4" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Image URL"
+                onChange={(e) => setFieldValue("images", [e.target.value])}
+                onBlur={handleBlur}
+                value={values.images[0] || ""}
+                name="images"
+                error={!!touched.images && !!errors.images}
+                helperText={touched.images && errors.images}
+                sx={{ gridColumn: "span 4" }}
+              />
+
+              <FormControl fullWidth variant="filled" sx={{ gridColumn: "span 2" }}>
+                <InputLabel>Is Featured</InputLabel>
+                <Select
+                  name="isFeatured"
+                  value={values.isFeatured}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={true}>Yes</MenuItem>
+                  <MenuItem value={false}>No</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl fullWidth variant="filled" sx={{ gridColumn: "span 2" }}>
+                <InputLabel>Is Published</InputLabel>
+                <Select
+                  name="isPublished"
+                  value={values.isPublished}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={true}>Yes</MenuItem>
+                  <MenuItem value={false}>No</MenuItem>
+                </Select>
+              </FormControl>
+
+            </Box>
 
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">

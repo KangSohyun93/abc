@@ -26,13 +26,21 @@ router.post("/create", protect, isAdmin, async (req, res) => {
                 for (const productData of products) {
                     try {
                         const {
+                            category,
                             name,
                             description,
                             price,
                             discountPrice,
-                            quantity,
-                            category,
+                            countInStock,
+                            character,
+                            material,
                             images,
+                            isFeatured,
+                            isPublished,
+                            tags,
+                            dimensions,
+                            weight,
+                            sku,
                         } = productData;
 
                         // Validation for each product
@@ -46,6 +54,7 @@ router.post("/create", protect, isAdmin, async (req, res) => {
 
                         // Check if category exists
                         const categoryExists = await Category.findById(category);
+                        console.log(categoryExists);
                         if (!categoryExists) {
                             errors.push({
                                 product: productData,
@@ -109,9 +118,17 @@ router.post("/create", protect, isAdmin, async (req, res) => {
                             description,
                             price,
                             discountPrice,
-                            quantity,
-                            category,
+                            countInStock,
+                            character,
+                            material,
                             images,
+                            isFeatured,
+                            isPublished,
+                            tags,
+                            category,
+                            dimensions,
+                            weight,
+                            sku,
                             user: req.user._id,
                         });
 
