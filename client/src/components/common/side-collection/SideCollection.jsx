@@ -40,7 +40,7 @@ const SideCollection = () => {
             <img
               src={imageSrc}
               alt={`Image ${index + 1}`}
-              className="max-w-15 max-h-13 object-cover border-1 border-[#000]"
+              className="w-12 h-12 object-cover border border-[#000]"
             />
             <span className="text-xs py-1">{name} {index}</span>
         </div>

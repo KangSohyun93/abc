@@ -6,7 +6,7 @@ import SlideDetail from "@/components/common/ProductDetailModes/SlideDetail";
 import Spinner from "@/components/ui/spinner";
 import { fakeProducts } from "@/data/WebData";
 import { setSkeleton } from "@/redux/reducers/LoadingReducer";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react"; // Removed useState
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -17,21 +17,7 @@ const ProductDetailPage = () => {
   const { id } = useParams();
   const product = fakeProducts.find((item) => item.id === Number(id));
 
-  // Calculate scale based on viewport width
-  const [scale, setScale] = useState(1);
-
-  useEffect(() => {
-    const updateScale = () => {
-      const maxWidth = 1200; // Reference width for full scale
-      const currentWidth = window.innerWidth;
-      const newScale = Math.min(currentWidth / maxWidth, 1); // Scale down if screen is smaller than 1200px
-      setScale(newScale > 0.6 ? newScale : 0.6); // Minimum scale of 0.6 for readability
-    };
-
-    updateScale();
-    window.addEventListener("resize", updateScale);
-    return () => window.removeEventListener("resize", updateScale);
-  }, []);
+  // Removed scale state and effect for calculating scale
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -41,38 +27,50 @@ const ProductDetailPage = () => {
     return () => clearTimeout(timer);
   }, [dispatch]);
 
+  // Handle case where product is not found
+  if (!product && !isLoading) {
+     return <div className="flex items-center justify-center h-full min-h-[40rem]">Product not found!</div>;
+  }
+
   return (
-    <div className="w-full flex justify-center mx-4 lg:mx-8">
-      <div
-        className="flex justify-center"
-        style={{
-          transform: `scale(${scale})`,
-          transformOrigin: "top center",
-          width: "1200px", // Fixed width to maintain layout proportions
-          marginBottom: `${80 * scale}px`, // Dynamic margin-bottom to reduce gap when scaled
-        }}
-      >
+    <div className="w-full">
+      {/* Removed the outer div with transform: scale */}
+      <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-4"> {/* Added max-width and padding */}
         {isLoading ? (
-          <div className="flex items-center justify-center h-full min-h-[30rem]">
+          <div className="flex items-center justify-center h-full min-h-[40rem]">
             <Spinner />
           </div>
         ) : (
           <div className="w-full">
             <CustomBreadcum name={product.name} />
-            <div className="flex gap-10 mb-10">
-              <div className="w-[60%]">
+            <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-5 md:mb-8 lg:mb-10"> {/* Increased bottom margin */}
+              {/* Slide Detail - Adjust width for large screens */}
+              {/* Example: 60% width on lg screens */}
+              <div className="w-full lg:w-3/5"> {/* Changed from lg:w-[95%] */}
                 <SlideDetail images={product.images} />
               </div>
-              <div className="w-[40%] flex justify-center items-center">
-                <ProductInformation />
+
+              {/* Product Information - Adjust width for large screens */}
+              {/* Example: 40% width on lg screens */}
+              <div className="w-full lg:w-2/5"> {/* Changed from lg:w-[5%] */}
+                {/* Pass product data to ProductInformation if needed */}
+                <ProductInformation product={product} />
               </div>
             </div>
-            <BannerProduct images={product.details} />
-            <NewArrivals
-              title={"you may also like"}
-              images={arrivalImages}
-              className="w-full mt-0 mx-auto"
-            />
+
+            {/* Banner Product - Full width */}
+            <div className="w-full mb-5 md:mb-8 lg:mb-10"> {/* Increased bottom margin */}
+              <BannerProduct images={product.details} />
+            </div>
+
+            {/* New Arrivals - Full width */}
+            <div className="w-full">
+              <NewArrivals
+                title={"you may also like"}
+                images={arrivalImages}
+                // Removed redundant w-full and mx-auto as parent handles width
+              />
+            </div>
           </div>
         )}
       </div>

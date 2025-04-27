@@ -50,7 +50,7 @@ const ProductInformation = () => {
   }, [msg]);
 
   return (
-    <div className="bg-white w-full">
+    <div className="bg-white w-full p-4 sm:p-6 md:p-8">
       {msg && (
         <Alert className="mb-4 absolute right-4 w-[200px] h-[50px] bg-[#333333] flex items-center -translate-y-10 transition-all duration-500 ease-in-out">
           <AlertDescription className="flex items-center justify-between text-sm">
@@ -64,28 +64,28 @@ const ProductInformation = () => {
         </Alert>
       )}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-2xl text-[#000] font-bold">
+        <h3 className="text-xl sm:text-2xl text-[#000] font-bold">
           Peach Riot Witchy Punk Figures
         </h3>
         <i className="bx bx-heart text-xl"></i>
       </div>
-      <span className="mt-2 text-xl text-[#d2001e]">
+      <span className="mt-2 text-lg sm:text-xl text-[#d2001e]">
         1.520.000 <sup>đ</sup>
       </span>
       <div className="my-4">
         <span className="text-base font-normal">Quantity</span>
         <AddQuantityBtn className="mt-2 w-auto h-auto" />
       </div>
-      <div className="flex gap-2 justify-center items-center mt-5 pb-5 border-b-2 border-b-[#DDDDDD]">
+      <div className="flex flex-col sm:flex-row gap-2 justify-center items-center mt-5 pb-5 border-b-2 border-b-[#DDDDDD]">
         <Button
-          className="uppercase w-[180px] h-10 text-white font-bold text-sm bg-black hover:bg-gray-800"
+          className="uppercase w-full sm:w-[180px] h-10 text-white font-bold text-sm bg-black hover:bg-gray-800"
           onClick={handleAddItemToCart}
         >
           Add to Cart
         </Button>
-        <Link to="/payment">
+        <Link to="/payment" className="w-full sm:w-auto">
           <Button
-            className="uppercase w-[180px] h-10 text-white font-bold text-sm bg-[#d2001e] hover:bg-red-700"
+            className="uppercase w-full sm:w-[180px] h-10 text-white font-bold text-sm bg-[#d2001e] hover:bg-red-700"
           >
             Buy Now
           </Button>
@@ -104,7 +104,7 @@ const ProductInformation = () => {
                     {line}
                   </span>
                 ))}
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row justify-between gap-2">
                   {item.outlinedText.map((text, i) => (
                     <span key={i} className="text-sm font-normal underline">
                       {text}

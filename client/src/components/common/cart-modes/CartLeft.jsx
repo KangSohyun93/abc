@@ -1,60 +1,77 @@
 import { Checkbox } from "@/components/ui/checkbox";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback } from "react";
 import AddQuantityBtn from "../AddQuantityBtn/AddQuantityBtn";
 import { useDispatch } from "react-redux";
 import { removeItemFromCart } from "@/redux/reducers/CartReducer";
+// import { Trash2 } from 'lucide-react';
 
 const CartLeft = () => {
-  const [msg, setMsg] = useState(false);
   const dispatch = useDispatch();
+  const productIdToRemove = "some-product-id";
 
   const handleRemoveItem = useCallback(() => {
-    dispatch(removeItemFromCart());
-    setMsg(true);
-  }, [dispatch]);
+    dispatch(removeItemFromCart(productIdToRemove));
+  }, [dispatch, productIdToRemove]);
 
-  return (
-    <div>
-      <div className="flex items-center space-x-2 mb-4">
-        <Checkbox id="terms" className="w-3.5 h-3.5 border-2 border-gray-600 focus:ring-0" />
-        <label
-          htmlFor="terms"
-          className="text-[0.875rem] lg:text-[0.8333vw] font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-        >
-          Select all
-        </label>
-      </div>
-      <div className="flex items-start">
-        <Checkbox
-          className="mr-2 lg:mr-3 w-3.5 h-3.5 border-2 border-gray-600 focus:ring-0 mt-0.5"
+  // Hàm render item
+  const renderCartItem = () => (
+    <div className="flex items-start py-5 border-b border-gray-200 last:border-b-0">
+      <Checkbox
+        // THAY ĐỔI: Đổi màu text khi check và màu focus ring thành màu xám
+        className="mr-3 md:mr-4 mt-1 w-4 h-4 border-2 border-gray-300 focus:ring-offset-0 focus:ring-1 focus:ring-gray-500 text-gray-600" // Đổi từ red sang gray
+      />
+      <div className="flex flex-row gap-3 sm:gap-4 w-full">
+        <img
+          className="w-[75px] h-[75px] sm:w-[90px] sm:h-[90px] md:w-[100px] md:h-[100px] object-cover rounded-md flex-shrink-0"
+          src="https://prod-eurasian-res.popmart.com/default/20250415_182606_284393____9_____1200x1200.jpg?x-oss-process=image/format,webp"
+          alt="Twinkle Twinkle Be a Little Star Series Figures"
         />
-        <div className="flex flex-col lg:flex-row gap-2 lg:gap-3 w-full">
-          <img
-            className="w-full max-w-[80px] h-[80px] lg:max-w-[100px] lg:h-[100px] object-cover rounded-lg"
-            src="https://prod-eurasian-res.popmart.com/default/20250415_182606_284393____9_____1200x1200.jpg?x-oss-process=image/format,webp"
-            alt="Twinkle Twinkle Be a Little Star Series Figures"
-          />
-          <div className="flex flex-col cart-left-detail w-full">
-            <h5 className="line-clamp-2 font-medium text-[0.875rem] lg:text-[0.8333vw]">
-              Twinkle Twinkle Be a Little Star Series Figures
-            </h5>
-            <span className="text-[#666] font-normal text-[0.75rem] lg:text-[0.7292vw] mt-1">
-              Single Box
-            </span>
-            <span className="mt-1 font-semibold text-[0.9375rem] lg:text-[0.875rem] mb-2">
-              280.000 <sup>đ</sup>
-            </span>
-            <div className="flex justify-between items-center">
-              <AddQuantityBtn className="mt-0" />
-              <span
-                className="uppercase text-[0.75rem] lg:text-[0.6771vw] font-medium leading-tight underline cursor-pointer hover:text-red-600"
-                onClick={handleRemoveItem}
-              >
-                remove
-              </span>
-            </div>
+        <div className="flex flex-col cart-left-detail w-full">
+          <h5 className="line-clamp-2 font-medium text-sm md:text-base text-gray-800 mb-0.5">
+            Twinkle Twinkle Be a Little Star Series Figures
+          </h5>
+          <span className="text-gray-500 font-normal text-xs md:text-sm">
+            Single Box
+          </span>
+          <span className="mt-1 font-semibold text-base md:text-lg text-gray-900 mb-1.5">
+            280.000 <sup>đ</sup>
+          </span>
+          <div className="flex justify-between items-center mt-auto pt-1">
+            <AddQuantityBtn className="mt-0" />
+            <button
+              onClick={handleRemoveItem}
+              className="uppercase text-xs text-gray-500 hover:text-red-600 font-medium tracking-wider transition-colors duration-200"
+              aria-label="Remove item"
+            >
+              Remove
+            </button>
           </div>
         </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm p-4 md:p-0 md:bg-transparent md:shadow-none">
+      {/* ---- Select all section ---- */}
+      <div className="flex items-center space-x-3 mb-4 px-0 md:px-4">
+        <Checkbox
+          id="select-all"
+           // THAY ĐỔI: Đổi màu text khi check và màu focus ring thành màu xám
+          className="w-4 h-4 border-2 border-gray-300 focus:ring-offset-0 focus:ring-1 focus:ring-gray-500 text-gray-600" // Đổi từ red sang gray
+        />
+        <label
+          htmlFor="select-all"
+          className="text-sm md:text-base font-medium text-gray-700 cursor-pointer"
+        >
+          Select all (1 item) {/* Cập nhật số lượng động */}
+        </label>
+      </div>
+      {/* ---- Hết Select all section ---- */}
+
+      <div className="md:border-t md:border-gray-200 md:px-4">
+         {renderCartItem()}
+         {/* Render các items khác nếu có */}
       </div>
     </div>
   );

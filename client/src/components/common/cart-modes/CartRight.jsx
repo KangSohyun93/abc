@@ -4,36 +4,42 @@ import { Link } from 'react-router-dom';
 
 const CartRight = () => {
   return (
-    <div className="bg-[#F5F5F5] flex flex-col p-3 lg:p-4">
+    // Điều chỉnh padding responsive
+    <div className="bg-[#F5F5F5] flex flex-col p-3 md:p-4 rounded-md"> {/* Thêm rounded-md nếu muốn */}
       <div className="border-b-2 border-b-[#CBCBCB] space-y-2 pb-3">
         <div className="flex justify-between items-center">
-          <span className="text-[0.75rem] lg:text-[0.7292vw] text-[#010101] font-medium">
+          <span className="text-sm md:text-base text-[#010101] font-medium"> {/* Responsive text size */}
             Subtotal
           </span>
-          <span className="text-[0.875rem] lg:text-[0.8333vw] font-semibold">
-            280.000 <sup>đ</sup> VND
+          {/* Responsive text size */}
+          <span className="text-base md:text-lg font-semibold">
+            280.000 <sup>đ</sup> {/* Bỏ VND nếu đơn vị tiền tệ đã rõ ràng */}
           </span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-[0.75rem] lg:text-[0.7292vw] text-[#010101] font-medium">
+          <span className="text-sm md:text-base text-[#010101] font-medium"> {/* Responsive text size */}
             Shipping
           </span>
-          <span className="text-[0.625rem] lg:text-[0.5208vw] font-medium">
+          {/* Responsive text size */}
+          <span className="text-xs md:text-sm font-medium text-right"> {/* Thêm text-right */}
             Calculated at next step
           </span>
         </div>
       </div>
       <div className="flex justify-between items-center mt-4">
-        <h5 className="text-[#010101] text-[0.9375rem] lg:text-[1.0417vw] font-semibold">
-          Total(1)
+         {/* Responsive text size */}
+        <h5 className="text-[#010101] text-base md:text-lg font-semibold">
+          Total(1) {/* Cần cập nhật số lượng động */}
         </h5>
-        <h5 className="text-[1rem] lg:text-[1.25vw] font-bold">
-          280.000 <sup>đ</sup> VND
+         {/* Responsive text size */}
+        <h5 className="text-lg md:text-xl font-bold">
+          280.000 <sup>đ</sup> {/* Bỏ VND */}
         </h5>
       </div>
-      <div className="mt-3">
+      <div className="mt-4 md:mt-6"> {/* Tăng margin top responsive */}
         <Link to={'/payment'}>
-          <Button className="uppercase w-full text-[0.75rem] lg:text-[0.8333vw] py-2" variant="destructive">
+          {/* Responsive text size cho button */}
+          <Button className="uppercase w-full text-sm md:text-base py-2.5 md:py-3" variant="destructive"> {/* Tăng nhẹ padding Y */}
             Check out
           </Button>
         </Link>

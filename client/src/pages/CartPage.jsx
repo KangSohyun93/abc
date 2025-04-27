@@ -4,16 +4,20 @@ import React from "react";
 
 const CartPage = () => {
   return (
-    <div className="flex justify-center items-start mb-10 flex-wrap cart-page-1">
-      <div className="lg:max-w-[63.2%] w-full h-full cart-page">
-        <h2 className="text-[1.5rem] lg:text-[1.66667vw] text-[#000] font-black uppercase mt-8 mb-4">
-          My cart
+    // Tùy chọn: Thêm nền nhẹ cho trang, ví dụ bg-gray-50
+    <div className="bg-white md:bg-gray-50 py-6 md:py-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Giảm độ đậm của tiêu đề, thêm tracking */}
+        <h2 className="text-2xl md:text-3xl text-gray-800 font-semibold uppercase tracking-wide mb-6 md:mb-8">
+          My Cart
         </h2>
-        <div className="flex flex-wrap flex-col lg:flex-row gap-6 lg:gap-8">
-          <div className="lg:flex-[0.6] w-full flex-none">
+        <div className="flex flex-col md:flex-row gap-6 lg:gap-10"> {/* Tăng gap */}
+          {/* Phần giỏ hàng bên trái */}
+          <div className="w-full md:flex-[0.65] lg:flex-[0.6]"> {/* Điều chỉnh flex-basis nếu cần */}
             <CartLeft />
           </div>
-          <div className="lg:flex-[0.4] w-full flex-none">
+          {/* Phần tóm tắt đơn hàng bên phải */}
+          <div className="w-full md:flex-[0.35] lg:flex-[0.4]"> {/* Điều chỉnh flex-basis nếu cần */}
             <CartRight />
           </div>
         </div>
